@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thống kê tuyển sinh 2026–2027 | CIS & SSV</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;font-family:'Lexend',sans-serif;}
+body{background:#f8f7f4;color:#1a1a18;font-size:13px;padding:1.5rem 1.25rem 3rem;}
+.wrap{max-width:920px;margin:0 auto;}
+.header{text-align:center;margin-bottom:1.5rem;}
+.header h1{font-size:15px;font-weight:500;margin-bottom:4px;}
+.header p{font-size:11px;color:#888;}
+.st{font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#999;margin:0 0 10px;padding-bottom:5px;border-bottom:0.5px solid #e0ddd6;}
+.tag{display:block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:4px;margin-bottom:8px;width:fit-content;}
+.ct{background:#FEE2E2;color:#991B1B;}
+.ss{background:#FEF3C7;color:#92400E;}
+.g2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem;}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;}
+.mc{background:#f1efe8;border-radius:6px;padding:7px 9px;text-align:center;}
+.mc .l{font-size:9px;color:#888;margin:0 0 2px;}
+.mc .v{font-size:15px;font-weight:500;margin:0;}
+.mc .p{font-size:10px;color:#888;margin:1px 0 0;}
+.chip{background:#f1efe8;border-radius:4px;padding:5px 8px;font-size:10px;color:#555;}
+.ch{background:#fff;border:0.5px solid #e0ddd6;border-radius:10px;padding:10px;}
+.dl{font-size:9px;color:#888;text-align:center;margin:3px 0 0;}
+.leg{display:flex;gap:10px;font-size:9px;color:#888;margin-bottom:6px;flex-wrap:wrap;}
+.leg span{display:flex;align-items:center;gap:3px;}
+.divider{height:0.5px;background:#e0ddd6;margin:1.25rem 0;}
+.sum{background:#f1efe8;border-radius:6px;padding:8px 12px;font-size:10px;color:#666;}
+.note{background:#FEF9C3;border:0.5px solid #FDE68A;border-radius:6px;padding:7px 12px;font-size:10px;color:#92400E;margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="header">
+  <h1>Thống kê tuyển sinh học sinh mới 2026–2027 | CIS &amp; SSV</h1>
+  <p>Cập nhật: 30/05/2026 &nbsp;·&nbsp; Năm học: 2026–2027 &nbsp;·&nbsp; Đơn vị: VNĐ</p>
+</div>
+
+<!-- SNAPSHOT -->
+<p class="st">Snapshot - cập nhật 30/05/2026</p>
+<div class="g2" style="margin-bottom:1.25rem;">
+
+  <div>
+    <span class="tag ct">CIS</span>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <div style="flex:1;min-width:0;">
+        <div style="position:relative;height:118px;"><canvas id="d1"></canvas></div>
+        <p class="dl">HS mới vs target 300</p>
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="position:relative;height:118px;"><canvas id="d2"></canvas></div>
+        <p class="dl">Phải nộp vs target 103B</p>
+      </div>
+    </div>
+    <div class="g3" style="margin-bottom:6px;">
+      <div class="mc"><p class="l">Đã thu</p><p class="v" style="color:#16a34a;">47.4B</p><p class="p">84.8%</p></div>
+      <div class="mc"><p class="l">Còn nợ</p><p class="v" style="color:#DC2626;">8.48B</p><p class="p">15.2%</p></div>
+      <div class="mc"><p class="l">HP công bố</p><p class="v">88.7B</p><p class="p">avg 391M</p></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+      <div class="chip">Nhóm thưởng (112 HS): <b style="color:#DC2626;">giảm 36.7%</b></div>
+      <div class="chip">Học bổng (31/50 HS): <b style="color:#DC2626;">giảm 66.4%</b></div>
+    </div>
+  </div>
+
+  <div>
+    <span class="tag ss">SSV</span>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <div style="flex:1;min-width:0;">
+        <div style="position:relative;height:118px;"><canvas id="d3"></canvas></div>
+        <p class="dl">HS mới vs target 300</p>
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="position:relative;height:118px;"><canvas id="d4"></canvas></div>
+        <p class="dl">Phải nộp vs target 67.7B</p>
+      </div>
+    </div>
+    <div class="g3" style="margin-bottom:6px;">
+      <div class="mc"><p class="l">Đã thu</p><p class="v" style="color:#16a34a;">29.9B</p><p class="p">83.7%</p></div>
+      <div class="mc"><p class="l">Còn nợ</p><p class="v" style="color:#D97706;">5.85B</p><p class="p">16.4%</p></div>
+      <div class="mc"><p class="l">HP công bố</p><p class="v">56.3B</p><p class="p">avg 215M</p></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+      <div class="chip">Nhóm thưởng (133 HS): <b style="color:#D97706;">giảm 33.1%</b></div>
+      <div class="chip">Học bổng (33/50 HS): <b style="color:#D97706;">giảm 62.3%</b></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- TRENDS -->
+<div class="divider"></div>
+<p class="st">Xu hướng theo tuần (03/04 - 30/05) + dự báo đến 25/07</p>
+
+<div class="leg" style="margin-bottom:12px;">
+  <span><span style="width:12px;height:2px;background:#DC2626;display:inline-block;border-radius:1px;"></span>CIS</span>
+  <span><span style="width:12px;height:2px;background:#D97706;display:inline-block;border-radius:1px;"></span>SSV</span>
+  <span><span style="width:12px;height:0;border-top:2px dashed #aaa;display:inline-block;"></span>dự báo</span>
+  <span><span style="width:12px;height:0;border-top:2px dotted rgba(180,83,9,0.5);display:inline-block;"></span>target</span>
+</div>
+
+<div class="g2" style="margin-bottom:1rem;">
+  <div><span class="tag ct">CIS - HS mới tích lũy</span><div style="position:relative;height:150px;"><canvas id="c1"></canvas></div></div>
+  <div><span class="tag ss">SSV - HS mới tích lũy</span><div style="position:relative;height:150px;"><canvas id="c2"></canvas></div></div>
+</div>
+
+<div class="g2" style="margin-bottom:1rem;">
+  <div><span class="tag ct">CIS - Net Revenue (tỷ VNĐ)</span><div style="position:relative;height:150px;"><canvas id="c3"></canvas></div></div>
+  <div><span class="tag ss">SSV - Net Revenue (tỷ VNĐ)</span><div style="position:relative;height:150px;"><canvas id="c4"></canvas></div></div>
+</div>
+
+<div class="g2" style="margin-bottom:1rem;">
+  <div><span class="tag ct">CIS - Average Tuition Fee (triệu VNĐ)</span><div style="position:relative;height:150px;"><canvas id="c5"></canvas></div></div>
+  <div><span class="tag ss">SSV - Average Tuition Fee (triệu VNĐ)</span><div style="position:relative;height:150px;"><canvas id="c6"></canvas></div></div>
+</div>
+
+<div class="g2" style="margin-bottom:1rem;">
+  <div class="ch">
+    <p style="font-size:10px;font-weight:500;color:#991B1B;margin:0 0 4px;">CIS - % giảm HP theo nhóm</p>
+    <div class="leg"><span><span style="width:10px;height:2px;background:#DC2626;display:inline-block;border-radius:1px;"></span>Nhóm thưởng</span><span><span style="width:10px;height:0;border-top:2px dashed #F87171;display:inline-block;"></span>Học bổng (max 50)</span></div>
+    <div style="position:relative;height:118px;"><canvas id="c7"></canvas></div>
+  </div>
+  <div class="ch">
+    <p style="font-size:10px;font-weight:500;color:#92400E;margin:0 0 4px;">SSV - % giảm HP theo nhóm</p>
+    <div class="leg"><span><span style="width:10px;height:2px;background:#D97706;display:inline-block;border-radius:1px;"></span>Nhóm thưởng</span><span><span style="width:10px;height:0;border-top:2px dashed #FCD34D;display:inline-block;"></span>Học bổng (max 50)</span></div>
+    <div style="position:relative;height:118px;"><canvas id="c8"></canvas></div>
+  </div>
+</div>
+
+<div class="sum g2" style="margin-bottom:8px;">
+  <div><b style="color:#DC2626;">CIS</b> - dự báo 25/07: ~<b id="cis-hs-fc">-</b> HS (<span id="cis-hs-pct">-</span>% target), Net Rev ~<b id="cis-nr-fc">-</b>B (<span id="cis-nr-pct">-</span>% target 103B)</div>
+  <div><b style="color:#D97706;">SSV</b> - dự báo 25/07: ~<b id="ssv-hs-fc">-</b> HS (<span id="ssv-hs-pct">-</span>% target), Net Rev ~<b id="ssv-nr-fc">-</b>B (<span id="ssv-nr-pct">-</span>% target 67.7B)</div>
+</div>
+<div class="note">Học bổng tối đa 50 suất/trường — CIS còn 19 suất, SSV còn 17 suất. Khi đủ 50 suất, học sinh mới chỉ vào nhóm giảm thưởng, ATF sẽ giảm và % giảm bình quân sẽ thay đổi.</div>
+
+</div>
+
+<script>
+var wL=['03/04','10/04','19/04','30/04','10/05','17/05','23/05','30/05'];
+var fL=['06/06','13/06','20/06','27/06','04/07','11/07','18/07','25/07'];
+var aL=wL.concat(fL);
+var N=wL.length, F=fL.length;
+
+var cisHS= [72,73,78,102,105,114,118,143];
+var ssvHS= [108,120,120,129,130,139,146,166];
+var cisNR= [26.42,26.99,29.30,37.74,39.99,43.70,45.95,55.85];
+var ssvNR= [23.40,26.48,26.67,27.81,27.81,29.58,31.38,35.67];
+var cisATF=[367,370,376,370,381,383,389,391];
+var ssvATF=[217,221,222,216,214,213,215,215];
+var cisTW=[37.0,36.7,36.4,35.2,35.2,35.2,35.1,36.7];
+var cisBT=[69.3,69.3,69.3,68.1,68.3,68.3,68.3,66.4];
+var ssvTW=[34.3,35.1,35.4,33.3,33.3,32.8,34.8,33.1];
+var ssvBT=[61.2,61.5,61.4,61.4,60.5,62.6,62.6,62.3];
+
+function lr(d){
+  var n=d.length,sx=0,sy=0,sxy=0,sx2=0;
+  for(var i=0;i<n;i++){sx+=i;sy+=d[i];sxy+=i*d[i];sx2+=i*i;}
+  var m=(n*sxy-sx*sy)/(n*sx2-sx*sx)||0,b=(sy-m*sx)/n;
+  return function(i){return Math.round((b+m*i)*100)/100;};
+}
+function fc(d,s){var f=lr(d);return Array.from({length:s},function(_,i){return f(d.length+i);});}
+function nl(n){return Array(n).fill(null);}
+
+var cHSfc=fc(cisHS,F), sHSfc=fc(ssvHS,F);
+var cNRfc=fc(cisNR,F), sNRfc=fc(ssvNR,F);
+var cATFfc=fc(cisATF,F), sATFfc=fc(ssvATF,F);
+
+// Fill summary
+var last=F-1;
+document.getElementById('cis-hs-fc').textContent=Math.round(cHSfc[last]);
+document.getElementById('cis-hs-pct').textContent=Math.round(cHSfc[last]/300*100);
+document.getElementById('cis-nr-fc').textContent=cNRfc[last].toFixed(1);
+document.getElementById('cis-nr-pct').textContent=Math.round(cNRfc[last]/103*100);
+document.getElementById('ssv-hs-fc').textContent=Math.round(sHSfc[last]);
+document.getElementById('ssv-hs-pct').textContent=Math.round(sHSfc[last]/300*100);
+document.getElementById('ssv-nr-fc').textContent=sNRfc[last].toFixed(1);
+document.getElementById('ssv-nr-pct').textContent=Math.round(sNRfc[last]/67.7*100);
+
+var tk={font:{size:9,family:'Lexend,sans-serif'}};
+var gc='rgba(0,0,0,0.07)';
+
+Chart.register({id:'cl',afterDraw:function(ch){
+  var ct=ch.config.options.cl;if(!ct)return;
+  var ctx=ch.ctx,m=ch.getDatasetMeta(0);
+  if(!m.data||!m.data[0])return;
+  var cx=m.data[0].x,cy=m.data[0].y;
+  ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.font='500 12px Lexend,sans-serif';ctx.fillStyle=ct.c||'#333';ctx.fillText(ct.l1,cx,cy-8);
+  ctx.font='9px Lexend,sans-serif';ctx.fillStyle='#888';ctx.fillText(ct.l2,cx,cy+8);ctx.restore();
+}});
+
+function donut(id,data,colors,cl){
+  new Chart(document.getElementById(id),{type:'doughnut',data:{datasets:[{data:data,backgroundColor:colors,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'72%',plugins:{legend:{display:false},tooltip:{enabled:false}},cl:cl}});
+}
+donut('d1',[143,157],['#DC2626','rgba(220,38,38,0.11)'],{l1:'143/300',l2:'47.7% target',c:'#DC2626'});
+donut('d2',[55.85,47.15],['#DC2626','rgba(220,38,38,0.11)'],{l1:'55.85B',l2:'54.2% KPI',c:'#DC2626'});
+donut('d3',[166,134],['#D97706','rgba(217,119,6,0.11)'],{l1:'166/300',l2:'55.3% target',c:'#D97706'});
+donut('d4',[35.67,32.03],['#D97706','rgba(217,119,6,0.11)'],{l1:'35.67B',l2:'52.7% KPI',c:'#D97706'});
+
+function xo(){return {grid:{display:false},ticks:Object.assign({maxRotation:40},tk)};}
+function yo(mn,mx,cb){var t=Object.assign({},tk);if(cb)t.callback=cb;var y={grid:{color:gc},ticks:t};if(mn!==undefined)y.min=mn;if(mx!==undefined)y.max=mx;return y;}
+function opt(mn,mx,cb){return {responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false}},scales:{x:xo(),y:yo(mn,mx,cb)}};}
+
+function lineFc(id,color,actual,fcData,target,yMax){
+  new Chart(document.getElementById(id),{type:'line',data:{labels:aL,datasets:[
+    {data:actual.concat(nl(F)),borderColor:color,backgroundColor:color+'15',borderWidth:2.5,pointRadius:3,fill:true,tension:0.3},
+    {data:nl(N-1).concat([actual[N-1]]).concat(fcData),borderColor:color,borderDash:[5,4],borderWidth:1.5,pointRadius:2,fill:false,tension:0.3},
+    {data:Array(aL.length).fill(target),borderColor:'rgba(180,83,9,0.35)',borderDash:[2,3],borderWidth:1,pointRadius:0}
+  ]},options:opt(0,yMax)});
+}
+lineFc('c1','#DC2626',cisHS,cHSfc,300,330);
+lineFc('c2','#D97706',ssvHS,sHSfc,300,330);
+lineFc('c3','#DC2626',cisNR,cNRfc,103,115);
+lineFc('c4','#D97706',ssvNR,sNRfc,67.7,75);
+lineFc('c5','#DC2626',cisATF,cATFfc,null,430);
+lineFc('c6','#D97706',ssvATF,sATFfc,null,250);
+
+function discountChart(id,tw,hb,c1,c2){
+  var all=tw.concat(hb).filter(function(v){return v>0;});
+  var mn=Math.floor(Math.min.apply(null,all)/5)*5,mx=Math.ceil(Math.max.apply(null,all)/5)*5;
+  new Chart(document.getElementById(id),{type:'line',data:{labels:wL,datasets:[
+    {data:tw,borderColor:c1,backgroundColor:'transparent',borderWidth:2,pointRadius:3,tension:0.3},
+    {data:hb,borderColor:c2,backgroundColor:'transparent',borderDash:[5,4],borderWidth:1.5,pointRadius:3,tension:0.3}
+  ]},options:opt(mn,mx,function(v){return v+'%';})});
+}
+discountChart('c7',cisTW,cisBT,'#DC2626','#F87171');
+discountChart('c8',ssvTW,ssvBT,'#D97706','#FCD34D');
+</script>
+</body>
+</html>
